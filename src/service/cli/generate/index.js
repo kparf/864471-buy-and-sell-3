@@ -33,6 +33,7 @@ const writeFile = util.promisify(fs.writeFile);
 
 module.exports = {
   name: `--generate`,
+  description: `формирует файл mocks.json`,
   async run(count) {
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(generateOffers(countOffer), null, 2);
