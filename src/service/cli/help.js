@@ -2,7 +2,7 @@
 
 module.exports = {
   name: `--help`,
-  run() {
+  async run() {
     console.log(`run help`);
   },
 };
