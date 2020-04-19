@@ -15,6 +15,7 @@ module.exports = {
   async run() {
 
     console.info(`
+    Программа запускает http-сервер и формирует файл с данными для API.
       Гайд:
       server <command>
 

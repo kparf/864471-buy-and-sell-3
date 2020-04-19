@@ -12,20 +12,25 @@ const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
 
 const SumRestrict = {
-  min: 1000,
-  max: 100000,
+  MIN: 1000,
+  MAX: 100000,
+};
+const CategorySizeRestrict = {
+  MIN: 1,
+  MAX: Math.min(3, categories.length),
 };
 
 const getPictureFileName = (index) => `item${padStart(index, 2, `0`)}.jpg`;
+const generateCategories = (count) => shuffle(categories).slice(0, count);
 
 const generateOffers = (count) => (
   Array(count).fill({}).map(() => ({
-    category: [categories[getRandomInt(0, categories.length - 1)]],
+    category: generateCategories(getRandomInt(CategorySizeRestrict.MIN, CategorySizeRestrict.MAX)),
     description: shuffle(descriptions).slice(1, 5).join(` `),
-    picture: getPictureFileName(getRandomInt(0, 16)),
+    picture: getPictureFileName(getRandomInt(1, 16)),
     title: titles[getRandomInt(0, titles.length - 1)],
     type: offerTypes[getRandomInt(0, offerTypes.length - 1)],
-    sum: getRandomInt(SumRestrict.min, SumRestrict.max),
+    sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
   }))
 );
 

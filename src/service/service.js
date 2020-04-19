@@ -10,15 +10,13 @@ const {
 const userArguments = process.argv.slice(USER_ARGV_INDEX);
 const [userCommand] = userArguments;
 
-try {
-  let result;
-  if (userArguments.length === 0 || !Cli[userCommand]) {
-    result = Cli[DEFAULT_COMMAND].run();
-  } else {
-    result = Cli[userCommand].run(...userArguments.slice(1));
-  }
-  result.then(() => process.exit(ExitCode.success));
-} catch (e) {
-  console.error(e);
-  process.exit(ExitCode.error);
+
+let result;
+if (userArguments.length === 0 || !Cli[userCommand]) {
+  result = Cli[DEFAULT_COMMAND].run();
+} else {
+  result = Cli[userCommand].run(...userArguments.slice(1));
 }
+result
+  .then(() => process.exit(ExitCode.SUCCESS))
+  .catch(() => process.exit(ExitCode.ERROR));
