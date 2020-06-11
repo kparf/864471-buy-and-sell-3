@@ -9,7 +9,7 @@ const DEFAULT_PORT = 3000;
 
 const app = express();
 app.use(express.json());
-app.use(offersRouter);
+app.use(`/offers`, offersRouter);
 app.use((req, res) => res
   .status(HttpCode.NOT_FOUND)
   .send(`Not found`));
