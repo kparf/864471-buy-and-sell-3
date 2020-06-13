@@ -22,6 +22,6 @@ app.use(`/my`, myRoutes);
 app.use(`/offers`, offersRoutes);
 
 app.use((req, res) => res.render(`404`));
-app.use((err, req, res, next) => res.render(`500`));
+app.use((err, req, res, _next) => res.render(`500`));
 
 app.listen(DEFAULT_PORT);
