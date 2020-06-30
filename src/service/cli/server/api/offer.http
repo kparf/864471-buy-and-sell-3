@@ -1,0 +1,48 @@
+GET http://localhost:3000/api/offers HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/offers/JnhJ3_ HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/offers HTTP/1.1
+content-type: application/json
+
+{
+  "category": [
+    "Игры",
+    "Журналы",
+    "Электроника"
+  ],
+  "description": "Кому нужен этот новый телефон, если тут такое... Брак на браке браком побраковавает. Мой дед не мог её сломать. Если найдёте дешевле — сброшу цену.",
+  "picture": "item12.jpg",
+  "title": "Продам книги Стивена Кинга.",
+  "type": "sale",
+  "sum": 15423,
+  "comments": [
+    {
+      "id": "InpFpV",
+      "text": "Совсем немного... С чем связана продажа? Почему так дешёво?"
+    },
+    {
+      "id": "oLZfmX",
+      "text": "Вы что?! В магазине дешевле. Почему в таком ужасном состоянии? Неплохо, но дорого"
+    }
+  ]
+}
+
+###
+
+PUT http://localhost:3000/api/offers/JnhJ3_ HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Уиии.... Как достигнуть успеха не вставая с кресла"
+}
+
+###
+
+DELETE http://localhost:3000/api/offers/VicDHQ HTTP/1.1
+
+###
