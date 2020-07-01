@@ -1,5 +1,6 @@
 'use strict';
 
+const {nanoid} = require(`nanoid`);
 const fs = require(`fs`);
 const util = require(`util`);
 const chalk = require(`chalk`);
@@ -13,6 +14,8 @@ const {
   FILE_SENTENCES_PATH,
   FILE_TITLES_PATH,
   FILE_CATEGORIES_PATH,
+  FILE_COMMENTS_PATH,
+  MAX_ID_LENGTH,
 } = require(`../../../constants`);
 
 
@@ -32,9 +35,24 @@ const CategorySizeRestrict = {
 
 const getPictureFileName = (index) => `item${padStart(index, 2, `0`)}.jpg`;
 const generateCategories = (count, categories) => shuffle(categories).slice(0, count);
-
-const generateOffers = (count, titles, categories, sentences) => (
+const generateComments = (count, comments) => (
   Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
+    text: shuffle(comments)
+      .slice(0, getRandomInt(1, 3))
+      .join(` `),
+  }))
+);
+
+const generateOffers = (
+  count,
+  titles,
+  categories,
+  sentences,
+  comments,
+) => (
+  Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     category: generateCategories(
         getRandomInt(CategorySizeRestrict.MIN, CategorySizeRestrict.MAX),
         categories,
@@ -44,6 +62,7 @@ const generateOffers = (count, titles, categories, sentences) => (
     title: titles[getRandomInt(0, titles.length - 1)],
     type: offerTypes[getRandomInt(0, offerTypes.length - 1)],
     sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
+    comments: generateComments(getRandomInt(1, comments.length - 1), comments),
   }))
 );
 
@@ -58,12 +77,14 @@ module.exports = {
       const titles = await readContent(FILE_TITLES_PATH);
       const categories = await readContent(FILE_CATEGORIES_PATH);
       const sentences = await readContent(FILE_SENTENCES_PATH);
+      const comments = await readContent(FILE_COMMENTS_PATH);
 
       const content = JSON.stringify(generateOffers(
           countOffer,
           titles,
           categories,
           sentences,
+          comments,
       ), null, 2);
       await writeFile(FILE_NAME, content);
       console.info(chalk.green(`Operation success. File created.`));
