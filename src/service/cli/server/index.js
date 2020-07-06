@@ -1,23 +1,17 @@
 'use strict';
 
 const chalk = require(`chalk`);
-const express = require(`express`);
-const {
-  HttpCode,
-  API_PREFIX,
-} = require(`../../../constants`);
+const {API_PREFIX} = require(`../../../constants`);
 const offersRouter = require(`./routes/offers-routes`);
 const routes = require(`./api`);
+const createServer = require(`./create-server`);
 
 const DEFAULT_PORT = 3000;
 
-const app = express();
-app.use(express.json());
-app.use(`/offers`, offersRouter);
-app.use(API_PREFIX, routes);
-app.use((req, res) => res
-  .status(HttpCode.NOT_FOUND)
-  .send(`Not found`));
+const app = createServer(
+  [`/offers`, offersRouter],
+  [API_PREFIX, routes],
+);
 
 module.exports = {
   name: `--server`,
