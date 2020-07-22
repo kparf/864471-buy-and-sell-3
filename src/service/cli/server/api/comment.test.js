@@ -53,7 +53,7 @@ describe(`Category API`, () => {
     expect(res.statusCode).toBe(200);
   });
 
-  it(`When get comments response bosy should contains all comments`, async () => {
+  it(`When get comments response body should contains all comments`, async () => {
     const res = await request(server).get(`/api/offers/H7wbHN/comments`);
     expect(res.body).toEqual(comments);
   });
