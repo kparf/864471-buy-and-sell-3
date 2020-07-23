@@ -2,6 +2,7 @@
 
 const chalk = require(`chalk`);
 const {API_PREFIX} = require(`../../../constants`);
+const logger = require(`../../../logger`);
 const offersRouter = require(`./routes/offers-routes`);
 const routes = require(`./api`);
 const createServer = require(`./create-server`);
@@ -21,10 +22,10 @@ module.exports = {
     app.listen(port)
       .on(`listening`, (err) => {
         if (err) {
-          return console.error(chalk.red(`Ошибка при создании сервера`), err);
+          return logger.error(chalk.red(`Ошибка при создании сервера`), err);
         }
 
-        return console.info(chalk.green(`Ожидаю соединений на ${port}`));
+        return logger.info(chalk.green(`Ожидаю соединений на ${port}`));
       });
   },
 };
