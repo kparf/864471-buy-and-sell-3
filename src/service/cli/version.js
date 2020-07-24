@@ -2,6 +2,7 @@
 
 const chalk = require(`chalk`);
 const packageJson = require(`../../../package.json`);
+const logger = require(`../../logger`);
 
 
 module.exports = {
@@ -9,6 +10,6 @@ module.exports = {
   description: `выводит номер версии`,
   async run() {
     const {version} = packageJson;
-    console.info(chalk.blue(version));
+    logger.info(chalk.blue(version));
   },
 };

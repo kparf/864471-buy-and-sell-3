@@ -3,7 +3,9 @@
 const chalk = require(`chalk`);
 const fs = require(`fs`);
 const utility = require(`util`);
+const { request } = require("express");
 const readFile = utility.promisify(fs.readFile);
+const logger = require(`../logger`);
 
 const getRandomInt = (inputMin, inputMax) => {
   const min = Math.ceil(inputMin);
@@ -28,7 +30,7 @@ const readContent = async (filePath) => {
     const content = await readFile(filePath, `utf8`);
     return content.split(`\n`);
   } catch (err) {
-    console.error(chalk.red(err));
+    logger.error(chalk.red(err));
     return [];
   }
 };
