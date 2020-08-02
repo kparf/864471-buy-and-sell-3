@@ -39,12 +39,34 @@
 </header>
 
 <main class="page-content">
-  <div class="message">
-    <div class="message__text">
-      <p>На сайте еще не опубликовано ни&nbsp;одного объявления.</p>
+  - var notEmpty = offers.length > 0
+  if notEmpty
+    <section class="categories-list">  
+      <h1 class="visually-hidden">Сервис объявлений "Куплю - продам"</h1>
+      <ul class="categories-list__wrapper">
+        - for(var i = 0; i < offers.length; i++)
+          <li class="categories-list__item">
+            <a href="#" class="category-tile category-tile--default">
+              <span class="category-tile__image">
+                img(
+                  src="img/" + offers[i].picture
+                  srcset="img/cat@2x.jpg 2x"
+                  alt="Иконка категории"
+                )
+              </span>
+              span(class="category-tile__label")= offers[i].title
+            </a>
+          </li>
+      </ul>
+    </section>
+  else
+    <div class="message">
+      <div class="message__text">
+        <p>На сайте еще не опубликовано ни&nbsp;одного объявления.</p>
+      </div>
+      <a href="#" class="message__link btn btn--big">Вход и регистрация</a>
     </div>
-    <a href="#" class="message__link btn btn--big">Вход и регистрация</a>
-  </div>
+
 </main>
 <footer class="page-footer">
   <div class="page-footer__wrapper">
